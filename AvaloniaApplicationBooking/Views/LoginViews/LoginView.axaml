@@ -1,0 +1,161 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="clr-namespace:AvaloniaApplicationBooking.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="750"
+             x:Class="AvaloniaApplicationBooking.Views.LoginViews.LoginView"
+			 Foreground="{Binding DefaultTextColor}">
+	
+	<UserControl.Resources>
+		<MenuFlyout x:Key="EditLayoutResource" Placement="RightEdgeAlignedTop">
+			<MenuItem Header="Language">
+				<MenuItem Header="English" Command="{Binding SetLanguage}" CommandParameter="0"/>
+				<MenuItem Header="Dansk" Command="{Binding SetLanguage}" CommandParameter="1"/>
+			</MenuItem>
+			<MenuItem Header="Theme Colors" InputGesture="Ctrl+A">
+				<MenuItem Header="Blue" Command="{Binding SetColorTheme}" CommandParameter="0"/>
+				<MenuItem Header="Red" Command="{Binding SetColorTheme}" CommandParameter="1" />
+				<MenuItem Header="Green" Command="{Binding SetColorTheme}" CommandParameter="2"/>
+			</MenuItem>
+		</MenuFlyout>
+	</UserControl.Resources>
+	<Grid RowDefinitions="1*, 
+						  0.08*">
+		<Grid.Background>
+			<LinearGradientBrush StartPoint="40%,60%" EndPoint="0%,100%">
+				<GradientStop Color="{Binding MainColor}" Offset="0" />
+				<GradientStop Color="{Binding SecondColor}" Offset="100" />
+			</LinearGradientBrush>
+		</Grid.Background>
+		<Border Grid.Row="0" Background="{Binding BorderBackgroundColor} " CornerRadius="0 0 40 40">
+			<Grid>
+				<Button Foreground="#15c2e0" Content="@" VerticalAlignment="Top" 
+						Height="30" Width="30"
+						Flyout="{StaticResource	EditLayoutResource}"/>
+				
+				<StackPanel Orientation="Vertical"
+						HorizontalAlignment="Center" VerticalAlignment="Center"
+						Margin="0 10 0 10">
+
+					<!-- Title -->
+					<StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+						<TextBlock Text="{Binding LoginTitleTXT}" Foreground="{Binding DefaultTextColor}"
+								   FontSize="38" FontFamily="Brush Script MT (cursive)" FontWeight="Bold" FontStyle="Oblique"
+								   Padding="10 0" HorizontalAlignment="Center"/>
+					</StackPanel>
+
+					<!-- Username -->
+					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+						<Image Width="20" Source="/Assets/avalonia-logo.ico"/>
+						<TextBox Text="{Binding LoginNameTXT}"
+								 Watermark="{Binding LoginNameWaterMarkTXT}"
+								 Margin="10,10,0,0" Width="200"/>
+					</StackPanel>
+					<StackPanel HorizontalAlignment="Center"
+								Margin="30 5 0 15">
+						<TextBlock Text="{Binding LoginNameCheckerTXT}" Foreground="IndianRed"
+								   MinWidth="200"/>
+					</StackPanel>
+
+					<!-- Password -->
+					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+						<Image Width="20" Source="/Assets/avalonia-logo.ico"/>
+						<TextBox Text="{Binding PasswordTXT}"
+								 PasswordChar="•" Watermark="{Binding PasswordWaterMarkTXT}"
+								 Margin="10,10,0,0" Width="200"/>
+					</StackPanel>
+					<StackPanel HorizontalAlignment="Center"
+								Margin="30 5 0 15">
+						<TextBlock Text="{Binding PasswordCheckerTXT}" Foreground="IndianRed"
+								   MinWidth="200"/>
+					</StackPanel>
+
+					<!-- Login BTN -->
+					<Button Command="{Binding LoginBTN}" Content="{Binding LoginBTNText}"
+							HorizontalAlignment="Center" Padding="20 7 20 7"
+							FontSize="15"
+							BorderThickness="2" CornerRadius="10"
+							Margin="0 0 0 15">
+						<Button.Styles>
+							<Style>
+								<Style.Resources>
+									<SolidColorBrush x:Key="ButtonBorderBrush" Color="{Binding MainColor}"/>
+									<SolidColorBrush x:Key="ButtonBackground" Color="{Binding MainColor}"/>
+									<SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{Binding SecondColor}"/>
+									<SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{Binding ButtonClickColor}"/>
+								</Style.Resources>
+							</Style>
+						</Button.Styles>
+					</Button>
+
+					<!-- Register User BTN -->
+					<Button Command="{Binding RegisterAUserBTN}" HorizontalAlignment="Center" Background="Transparent"
+							BorderThickness="0" CornerRadius="10"
+							Padding="10 7 10 7">
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="{Binding RegisterUserP1TXT}" Foreground="{Binding DefaultTextColor}" Margin="0 0 5 0"/>
+							<TextBlock Text="{Binding RegisterUserP2TXT}" Foreground="{Binding HighlightColor}"/>
+						</StackPanel>
+						<Button.Styles>
+							<Style>
+								<Style.Resources>
+									<SolidColorBrush x:Key="ButtonBackgroundPointerOver">#313e44</SolidColorBrush>
+									<SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{Binding ButtonClickColor}"/>
+								</Style.Resources>
+							</Style>
+						</Button.Styles>
+					</Button>
+
+					<!-- Optional Button - YES & NO -->
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition/>
+							<RowDefinition/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition/>
+							<ColumnDefinition/>
+						</Grid.ColumnDefinitions>
+
+						<TextBlock Text="{Binding InfoTextTXT}" Grid.ColumnSpan="2"
+								   HorizontalAlignment="Center" Foreground="IndianRed"
+								   Margin="0 10 0 10"/>
+
+						<Button x:Name="btnYes" Content="{Binding BTNYesTXT}" CornerRadius="10"
+								Padding="10 7 10 7" HorizontalAlignment="Right"
+								Grid.Row="1"
+								Margin="2" IsVisible="{Binding btnYes}">
+							<Button.Styles>
+								<Style>
+									<Style.Resources>
+										<SolidColorBrush x:Key="ButtonBorderBrush">#95a5a6</SolidColorBrush>
+										<SolidColorBrush x:Key="ButtonBackground">#95a5a6</SolidColorBrush>
+										<SolidColorBrush x:Key="ButtonBackgroundPointerOver">#3bc790</SolidColorBrush>
+										<SolidColorBrush x:Key="ButtonBackgroundPressed">#059059</SolidColorBrush>
+									</Style.Resources>
+								</Style>
+							</Button.Styles>
+						</Button>
+
+						<Button x:Name="btnNo" Content="{Binding BTNNoTXT}" CornerRadius="10"
+								Padding="10 7 10 7" HorizontalAlignment="Left"
+								Grid.Row="1" Grid.Column="2"
+								Margin="2" IsVisible="{Binding btnNo}">
+							<Button.Styles>
+								<Style>
+									<Style.Resources>
+										<SolidColorBrush x:Key="ButtonBorderBrush">#95a5a6</SolidColorBrush>
+										<SolidColorBrush x:Key="ButtonBackground">#95a5a6</SolidColorBrush>
+										<SolidColorBrush x:Key="ButtonBackgroundPointerOver">#C70039</SolidColorBrush>
+										<SolidColorBrush x:Key="ButtonBackgroundPressed">#900C3F</SolidColorBrush>
+									</Style.Resources>
+								</Style>
+							</Button.Styles>
+						</Button>
+					</Grid>
+				</StackPanel>
+			</Grid>
+		</Border>
+	</Grid>
+</UserControl>

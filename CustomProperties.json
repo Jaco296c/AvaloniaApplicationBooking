@@ -1,0 +1,26 @@
+[
+  {
+    "Name": "Username/LoginMaxLength",
+    "MaxValue": 20.0
+  },
+  {
+    "Name": "PasswordMaxLength",
+    "MaxValue": 30.0
+  },
+  {
+    "Name": "FirstnameMaxLength",
+    "MaxValue": 200.0
+  },
+  {
+    "Name": "LastnameMaxLength",
+    "MaxValue": 200.0
+  },
+  {
+    "Name": "MailMaxLength",
+    "MaxValue": 320.0
+  },
+  {
+    "Name": "PhoneNumberMaxLength",
+    "MaxValue": 20.0
+  }
+]
